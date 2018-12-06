@@ -1,0 +1,6 @@
+<ng-container *ngIf="(employees$ | async) as employees">
+  <div color='primary'
+       *ngFor="let employee of employees">
+    <h2>{{employee.name}} - {{employee.company}} - {{employee.age}}</h2>
+  </div>
+</ng-container>

@@ -1,0 +1,19 @@
+<p>
+  home works!
+</p>
+<mat-drawer-container class="example-container">
+  <mat-drawer #drawer
+              disableClose="true"
+              mode="push">
+    <mat-icon matListIcon
+              (click)="drawer.close()">close</mat-icon>
+    <app-vertical-menu></app-vertical-menu>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button mat-raised-button
+            (click)="drawer.open()">
+      <mat-icon matListIcon>menu</mat-icon>
+    </button>
+    <app-home-menu></app-home-menu>
+  </mat-drawer-content>
+</mat-drawer-container>
