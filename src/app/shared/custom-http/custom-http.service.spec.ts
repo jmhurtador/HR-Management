@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ApiService } from './api.service';
+import { CustomHttpService } from './custom-http.service';
 
-describe('ApiService', () => {
+describe('CustomHttpService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ApiService = TestBed.get(ApiService);
+    const service: CustomHttpService = TestBed.get(CustomHttpService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,5 +1,5 @@
-import { ApiService } from './../../shared/api.service';
 import { Component, OnInit } from '@angular/core';
+import { CustomHttpService } from './../../shared/custom-http/custom-http.service';
 import { Employees } from '../employees.interface';
 import { Observable } from 'rxjs';
 
@@ -13,8 +13,8 @@ export class EmployeesComponent implements OnInit {
 
   employees$: Observable<Employees>;
 
-  constructor(private api: ApiService) {
-    this.employees$ = api.getData<Employees>(this.url);
+  constructor(private api: CustomHttpService) {
+    this.employees$ = api.get<Employees>(this.url);
   }
 
   ngOnInit() {}

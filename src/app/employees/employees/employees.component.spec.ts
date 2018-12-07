@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EmployeesComponent } from './employees.component';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
+
 
 describe('EmployeesComponent', () => {
   let component: EmployeesComponent;
@@ -8,9 +12,8 @@ describe('EmployeesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmployeesComponent ]
-    })
-    .compileComponents();
+      declarations: [EmployeesComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -18,7 +21,7 @@ describe('EmployeesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  // let pr1Em = employees.filter( (employee) => employee.project === 1 )
   it('should create', () => {
     expect(component).toBeTruthy();
   });

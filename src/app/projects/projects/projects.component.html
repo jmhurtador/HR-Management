@@ -4,6 +4,6 @@
 <ng-container *ngIf="(projects$ | async) as projects">
   <div color='primary'
        *ngFor="let project of projects">
-    <h2>{{project.id}} - {{project.name}} - {{project.client_name}}</h2>
+    <h2>{{project.id}} - {{project.name}} - {{project.clientName}}</h2>
   </div>
 </ng-container>

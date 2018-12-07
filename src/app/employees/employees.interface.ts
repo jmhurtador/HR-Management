@@ -4,6 +4,6 @@ export interface Employees {
   company: string;
   age: number;
   birthday: Date;
-  favorite_color: string;
+  favoriteColor: string;
   project: number;
 }

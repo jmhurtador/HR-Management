@@ -1,5 +1,5 @@
-import { ApiService } from './../../shared/api.service';
 import { Component, OnInit } from '@angular/core';
+import { CustomHttpService } from './../../shared/custom-http/custom-http.service';
 import { Observable } from 'rxjs';
 import { Projects } from '../projects.interface';
 
@@ -13,8 +13,8 @@ export class ProjectsComponent implements OnInit {
 
   projects$: Observable<Projects>;
 
-  constructor(private api: ApiService) {
-    this.projects$ = api.getData<Projects>(this.url);
+  constructor(private api: CustomHttpService) {
+    this.projects$ = api.get<Projects>(this.url);
   }
 
   ngOnInit() {}

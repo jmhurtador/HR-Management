@@ -1,8 +1,8 @@
 import { EmployeesComponent } from './employees/employees/employees.component';
 import { HomeComponent } from './home/home/home.component';
+import { HttpNotFoundComponent } from './core/http-not-found/http-not-found.component';
 import { LoginComponent } from './login/login/login.component';
 import { NgModule } from '@angular/core';
-import { NotfoundComponent } from './errors/notfound/notfound.component';
 import { ProjectsComponent } from './projects/projects/projects.component';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -21,7 +21,7 @@ const routes: Routes = [
     // loadChildren:
     //   './projects/projects/projects.module#ProjectsModule',
   },
-  { path: '**', component: NotfoundComponent },
+  { path: '**', component: HttpNotFoundComponent },
 ];
 
 @NgModule({
