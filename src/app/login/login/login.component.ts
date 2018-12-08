@@ -9,27 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  formGroup: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
     private router: Router,
-  ) {
-    this.form = this.formBuilder.group({
-      email: ['jmhurtador@gmail.com', Validators.required],
-      password: ['123456ABC', Validators.required],
-    });
-  }
-
-  onSubmit(event) {
-    console.log(event);
-  }
+  ) {}
 
   logIn() {
     this.authService
       .logIn(
-        this.form.get('email').value,
-        this.form.get('password').value,
+        this.formGroup.get('email').value,
+        this.formGroup.get('password').value,
       )
       .then((res) => {
         console.log(res);
@@ -39,19 +30,45 @@ export class LoginComponent implements OnInit {
       .catch((err) => console.log('error: ' + err));
   }
 
-  // tryRegister(value) {
-  //   this.authService.doRegister(value).then(
-  //     (res) => {
-  //       console.log(res);
-  //       this.errorMessage = '';
-  //       this.successMessage = 'Your account has been created';
-  //     },
-  //     (err) => {
-  //       console.log(err);
-  //       this.errorMessage = err.message;
-  //       this.successMessage = '';
-  //     },
-  //   );
-  // }
-  ngOnInit() {}
+  ngOnInit() {
+    this.createForm();
+  }
+
+  createForm() {
+    // tslint:disable-next-line:max-line-length
+    const emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    this.formGroup = this.formBuilder.group({
+      email: [
+        null,
+        [Validators.required, Validators.pattern(emailregex)],
+      ],
+      password: [null, [Validators.required, this.checkPassword]],
+    });
+  }
+
+  checkPassword(control) {
+    const enteredPassword = control.value;
+    const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
+    return !passwordCheck.test(enteredPassword) && enteredPassword
+      ? { requirements: true }
+      : null;
+  }
+
+  getErrorEmail() {
+    return this.formGroup.get('email').hasError('required')
+      ? 'Field is required'
+      : this.formGroup.get('email').hasError('pattern')
+      ? 'Not a valid email'
+      : '';
+  }
+
+  getErrorPassword() {
+    // tslint:disable-next-line:max-line-length
+    return this.formGroup.get('password').hasError('required')
+      ? 'Field is required (at least eight characters, one uppercase letter and one number)'
+      : // tslint:disable-next-line:max-line-length
+      this.formGroup.get('password').hasError('requirements')
+      ? 'Password needs to be at least eight characters, one uppercase letter and one number'
+      : '';
+  }
 }

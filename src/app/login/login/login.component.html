@@ -7,7 +7,53 @@
 
 
 </form> -->
-<form [formGroup]="form"
+<div style="text-align:center">
+  <h1>
+    Welcome to HR Management!
+  </h1>
+</div>
+
+<div class="container"
+     novalidate>
+  <div>
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space">Login</span>
+    </mat-toolbar>
+  </div>
+  <form [formGroup]="formGroup"
+        (ngSubmit)="logIn()"
+        class="form">
+
+    <mat-form-field class="form-element">
+      <input matInput
+             placeholder="Email"
+             formControlName="email">
+      <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+        {{ getErrorEmail() }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-element">
+      <input matInput
+             placeholder="Password"
+             formControlName="password">
+      <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
+      <mat-error *ngIf="!formGroup.controls['password'].valid && formGroup.controls['email'].touched">
+        {{ getErrorPassword() }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-element">
+      <button mat-raised-button
+              color="primary"
+              type="submit"
+              class="button"
+              [disabled]="formGroup.invalid">Login</button>
+    </div>
+
+  </form>
+</div>
+<!-- <form [formGroup]="form"
       (ngSubmit)="logIn()">
   <h3 align="
       center">Login Form</h3>
@@ -33,4 +79,4 @@
       Login
     </button>
   </div>
-</form>
+</form> -->

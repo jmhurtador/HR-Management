@@ -1,4 +1,5 @@
-<mat-card class="example-card">
+<mat-card class="example-card"
+          (clic)="goToEmployees()">
   <mat-card-content>
     <mat-icon matListIcon>people</mat-icon>
   </mat-card-content>
@@ -6,7 +7,8 @@
     <h3>Employees</h3>
   </mat-card-footer>
 </mat-card>
-<mat-card class="example-card">
+<mat-card class="example-card"
+          (clic)="goToProjects()">
   <mat-card-content>
     <mat-icon matListIcon>business_center</mat-icon>
   </mat-card-content>
