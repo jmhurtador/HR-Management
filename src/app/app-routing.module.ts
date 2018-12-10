@@ -25,9 +25,7 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
-    canActivate: [AuthenticationGuard],
-    // loadChildren:
-    //   './projects/projects/projects.module#ProjectsModule',
+    // loadChildren: './projects/projects.module#ProjectsModule',
   },
   { path: 'forbidden', component: HttpForbiddenComponent },
   { path: '**', component: HttpNotFoundComponent },

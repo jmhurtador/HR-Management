@@ -39,10 +39,13 @@ export class LoginComponent implements OnInit {
     const emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     this.formGroup = this.formBuilder.group({
       email: [
-        null,
+        'jmhurtador@gmail.com',
         [Validators.required, Validators.pattern(emailregex)],
       ],
-      password: [null, [Validators.required, this.checkPassword]],
+      password: [
+        'abC123456',
+        [Validators.required, this.checkPassword],
+      ],
     });
   }
 

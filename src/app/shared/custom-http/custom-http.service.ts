@@ -10,7 +10,15 @@ export class CustomHttpService {
     return this.httpClient.get<T>(url);
   }
 
-  post(url: string, body: any) {
-    return this.httpClient.post(url, body);
+  post<T>(url: string, body: any): Observable<T> {
+    return this.httpClient.post<T>(url, body);
+  }
+
+  delete<T>(url: string): Observable<T> {
+    return this.httpClient.delete<T>(url);
+  }
+
+  put<T>(url: string, body: any): Observable<T> {
+    return this.httpClient.put<T>(url, body);
   }
 }

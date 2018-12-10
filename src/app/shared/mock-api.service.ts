@@ -9,7 +9,7 @@ export class MockApiService implements InMemoryDbService {
         company: 'Yuxi Global',
         age: 38,
         birthday: '1980/03/03',
-        favoriteColor: 'Red',
+        favoriteColor: 'Green',
         project: 1,
       },
       {
@@ -18,7 +18,7 @@ export class MockApiService implements InMemoryDbService {
         company: 'Yuxi Global',
         age: 39,
         birthday: '1979/12/24',
-        favoriteColor: 'Green',
+        favoriteColor: 'Blue',
         project: 1,
       },
       {
@@ -27,7 +27,7 @@ export class MockApiService implements InMemoryDbService {
         company: 'Yuxi Global',
         age: 30,
         birthday: '1988/05/12',
-        favoriteColor: 'Green',
+        favoriteColor: 'Red',
         project: 1,
       },
       {
@@ -36,7 +36,7 @@ export class MockApiService implements InMemoryDbService {
         company: 'Yuxi Global',
         age: 37,
         birthday: '1981/10/19',
-        favoriteColor: 'Dark Grey',
+        favoriteColor: 'Gray',
         project: 2,
       },
       {
@@ -72,7 +72,7 @@ export class MockApiService implements InMemoryDbService {
         company: 'Yuxi Global',
         age: 25,
         birthday: '1993/01/28',
-        favoriteColor: 'Pink',
+        favoriteColor: 'Yellow',
         project: 6,
       },
     ];
