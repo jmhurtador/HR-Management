@@ -634,8 +634,6 @@ firebase/auth
 
 @angular/material/icon
 
-@angular/material/menu
-
 @angular/material/card
 
 @angular/material/sort

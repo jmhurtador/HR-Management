@@ -27,7 +27,7 @@
              placeholder="Client name"
              formControlName="clientName"
              required>
-      <mat-hint>Choose a password of at least eight characters, one uppercase letter and one number</mat-hint>
+      <mat-hint>Type a Client name</mat-hint>
       <mat-error *ngIf="!formGroup.controls['clientName'].valid && formGroup.controls['clientName'].touched">
         {{ getErrorClientName() }}
       </mat-error>

@@ -1,17 +1,19 @@
 <mat-drawer-container class="container">
   <mat-drawer #drawer
               disableClose="true"
-              hashback="false"
+              hashBackdrop="false"
               mode="push">
-    <mat-icon matListIcon
-              class="close"
+    <mat-icon class="close"
               (click)="drawer.close()">close</mat-icon>
     <app-vertical-menu></app-vertical-menu>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="closeIcon">
     <button mat-raised-button
+            color="warn"
+            type="submit"
+            class="button"
             (click)="drawer.open()">
-      <mat-icon matListIcon
+      <mat-icon aria-label="Menu"
                 class="menu">menu</mat-icon>
     </button>
     <app-home-menu></app-home-menu>

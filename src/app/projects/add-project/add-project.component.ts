@@ -39,7 +39,7 @@ export class AddProjectComponent implements OnInit {
 
   onSubmit() {
     const project: Project = {
-      id: 0,
+      id: null,
       name: this.formGroup.get('name').value,
       teamSize: 0,
       clientName: this.formGroup.get('clientName').value,

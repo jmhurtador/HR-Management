@@ -1,16 +1,25 @@
-<button mat-menu-item
+<button mat-raised-button
+        color="warn"
+        type="button"
+        class="button"
         (click)="goToEmployees()">
   <mat-icon>people</mat-icon>
-  <span>Employees</span>
+  Employees
 </button>
-<button mat-menu-item
+<button mat-raised-button
+        color="warn"
+        type="button"
+        class="button"
         (click)="goToProjects()">
-  <mat-icon>business_center</mat-icon>
-  <span>Projects</span>
+  <mat-icon aria-label="Projects">business_center</mat-icon>
+  Projects
 </button>
-<button mat-menu-item
+<button mat-raised-button
+        color="warn"
+        type="button"
+        class="button"
         (click)="logOut()">
-  <mat-icon>Cancel</mat-icon>
-  <span>Logout</span>
+  <mat-icon aria-label="Logout">cancel</mat-icon>
+  Logout
   <!-- <a href="" (click)="authService.logout()">Logout</a> -->
 </button>
