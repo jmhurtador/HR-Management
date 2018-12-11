@@ -5,12 +5,24 @@
 
 .close {
   display: inline-block;
-  margin-right: 0px;
-  margin-bottom: 0px;
+  margin-right: 5px;
+  margin-top: 5px;
   width: 100%;
+  position: fixed;
 }
 
 .closeIcon {
   margin-block-start: 5px;
-  margin-right: 0px;
+}
+
+.button {
+  margin-left: 5px;
+  margin-top: 5px;
+  position: absolute;
+}
+
+.homeMenu {
+  padding: 10px;
+  display: block;
+  text-align: center;
 }
