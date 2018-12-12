@@ -17,9 +17,11 @@ export class AuthenticationService {
 
     this.user.subscribe((user) => {
       if (user) {
+        console.log('With User');
         this.userDetails = user;
         console.log(this.userDetails);
       } else {
+        console.log('-------- No User');
         this.userDetails = null;
       }
     });
@@ -30,14 +32,15 @@ export class AuthenticationService {
       email,
       password,
     );
-    console.log(email + ' ' + password);
-    return this.firebaseAuth.auth.signInWithEmailAndPassword(
-      email,
-      password,
-    );
+    return this.firebaseAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.userDetails = user.user;
+      });
   }
 
   isLoggedIn() {
+    console.log(this.userDetails);
     if (this.userDetails == null) {
       return false;
     } else {
@@ -50,18 +53,4 @@ export class AuthenticationService {
       .signOut()
       .then((res) => this.router.navigate(['login']));
   }
-
-  // doRegister(value) {
-  //   return new Promise<any>((resolve, reject) => {
-  //     this.firebaseAuth
-  //       .auth()
-  //       .createUserWithEmailAndPassword(value.email, value.password)
-  //       .then(
-  //         (res) => {
-  //           resolve(res);
-  //         },
-  //         (err) => reject(err),
-  //       );
-  //   });
-  // }
 }

@@ -24,9 +24,11 @@ export class AuthenticationGuard implements CanActivate {
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isLoggedIn()) {
+      console.log('isLoggedIn');
+
       return true;
     }
-    this.router.navigate(['forbidden']);
+    this.router.navigate(['/forbidden']);
     return false;
   }
 }

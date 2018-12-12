@@ -41,14 +41,19 @@ export class EmployeesComponent implements OnInit {
 
   url = 'app/employees';
   urlProjects = 'app/projects';
-  projects: Project[];
+  projects: Project[] = [];
 
   constructor(
     private api: CustomHttpService,
     private formBuilder: FormBuilder,
     private router: Router,
     public datepipe: DatePipe,
-  ) {}
+  ) {
+    this.api.get<Project[]>(this.urlProjects).subscribe((result) => {
+      console.log(result);
+      this.projects = result;
+    });
+  }
 
   ngOnInit() {
     this.api.get<Employee[]>(this.url).subscribe((result) => {
@@ -59,25 +64,20 @@ export class EmployeesComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
     this.createForm();
-
-    this.api.get<Project[]>(this.urlProjects).subscribe((result) => {
-      console.log(result);
-      this.projects = result;
-    });
   }
 
   createForm() {
     this.formGroup = this.formBuilder.group({
       id: [null],
       name: [
-        'Juan Herrera',
+        '',
         [Validators.min(3), Validators.max(30), Validators.required],
       ],
-      company: ['Yuxi Global', [Validators.required]],
+      company: ['', [Validators.required]],
       age: [0],
       birthday: [{ '': Date, disabled: true }, [Validators.required]],
       favoriteColor: ['', [Validators.required]],
-      project: [3, [Validators.required]],
+      project: [0, [Validators.required]],
     });
   }
 
@@ -98,19 +98,28 @@ export class EmployeesComponent implements OnInit {
     return years;
   }
 
-  add() {
-    console.log(this.formGroup.get('id').value);
-    // const projectIndex = this.projects.findIndex(
-    //   (p) => p.id === this.formGroup.get('project').value,
-    // );
-    // this.projects[projectIndex].teamSize++;
+  getProjectName(projectId: number) {
+    if (this.projects.length > 0) {
+      const projectIndex = this.projects.findIndex(
+        (p) => p.id === projectId,
+      );
+      return this.projects[projectIndex].name;
+    }
+  }
 
-    // this.api
-    //   .post(this.urlProjects, this.projects[projectIndex])
-    //   .pipe(
-    //     switchMap(() => this.api.get<Project[]>(this.urlProjects)),
-    //   )
-    //   .subscribe((resultupdated) => {});
+  add() {
+    console.log(this.formGroup.get('project').value);
+    const projectIndex = this.projects.findIndex(
+      (p) => p.id === this.formGroup.get('project').value,
+    );
+    this.projects[projectIndex].teamSize++;
+
+    this.api
+      .post(this.urlProjects, this.projects[projectIndex])
+      .pipe(
+        switchMap(() => this.api.get<Project[]>(this.urlProjects)),
+      )
+      .subscribe((resultupdated) => {});
 
     const employee: Employee = {
       id: this.formGroup.get('id').value,
@@ -167,17 +176,17 @@ export class EmployeesComponent implements OnInit {
     if (
       confirm('Are you sure to delete ' + row.name + ' ?') === true
     ) {
-      // const projectIndex = this.projects.findIndex(
-      //   (p) => p.id === row.project,
-      // );
-      // this.projects[projectIndex].teamSize--;
+      const projectIndex = this.projects.findIndex(
+        (p) => p.id === row.project,
+      );
+      this.projects[projectIndex].teamSize--;
 
-      // this.api
-      //   .post(this.urlProjects, this.projects[projectIndex])
-      //   .pipe(
-      //     switchMap(() => this.api.get<Project[]>(this.urlProjects)),
-      //   )
-      //   .subscribe((resultupdated) => {});
+      this.api
+        .post(this.urlProjects, this.projects[projectIndex])
+        .pipe(
+          switchMap(() => this.api.get<Project[]>(this.urlProjects)),
+        )
+        .subscribe((resultupdated) => {});
 
       const deleteUrl = this.url + '/' + row.id;
       console.log(deleteUrl);

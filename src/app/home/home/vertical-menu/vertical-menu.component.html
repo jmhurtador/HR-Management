@@ -1,22 +1,28 @@
 <button mat-raised-button
-        color="warn"
+        color="primary"
         class="button"
         (click)="goToEmployees()">
-  <mat-icon inline=true>people</mat-icon>
-  Employees
+  <span class="button">
+    <mat-icon aria-label="Employees">people</mat-icon>
+    Employees
+  </span>
 </button>
 <button mat-raised-button
-        color="warn"
+        color="primary"
         class="button"
         (click)="goToProjects()">
-  <mat-icon aria-label="Projects">business_center</mat-icon>
-  Projects
+  <span class="button">
+    <mat-icon aria-label="Projects">business_center</mat-icon>
+    Projects
+  </span>
 </button>
 <button mat-raised-button
-        color="warn"
+        color="primary"
         class="button"
         (click)="logOut()">
-  <mat-icon aria-label="Logout">power_settings_new</mat-icon>
-  Logout
+  <span class="button">
+    <mat-icon aria-label="Logout">power_settings_new</mat-icon>
+    Logout
+  </span>
   <!-- <a href="" (click)="authService.logout()">Logout</a> -->
 </button>

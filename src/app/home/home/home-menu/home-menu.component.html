@@ -2,20 +2,22 @@
   <button mat-raised-button
           class="button"
           type="button"
-          color="warn"
-          (clic)="goToEmployees()">
+          color="primary"
+          (click)="goToEmployees()">
     <span>
-      <mat-icon inline=true>people</mat-icon>
+      <mat-icon inline=true
+                aria-label="Employees">people</mat-icon>
       Employees
     </span>
   </button>
   <button mat-raised-button
           class="button"
           type="button"
-          color="warn"
-          (clic)="goToProjects()">
+          color="primary"
+          (click)="goToProjects()">
     <span>
-      <mat-icon inline=true>business_center</mat-icon> Projects
+      <mat-icon inline=true
+                aria-label="Projects">business_center</mat-icon> Projects
     </span>
   </button>
 </div>

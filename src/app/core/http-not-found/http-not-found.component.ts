@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class HttpNotFoundComponent implements OnInit {
   constructor(private router: Router) {
     setTimeout(() => {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     }, 3000);
   }
 
