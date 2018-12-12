@@ -10,6 +10,7 @@ export class HomeMenuComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}
+
   goToEmployees() {
     this.router.navigate(['employees']);
   }

@@ -1,21 +1,27 @@
-<mat-drawer-container class="container">
-  <mat-drawer #drawer
-              disableClose="true"
-              hashBackdrop="false"
-              mode="push">
-    <mat-icon class="close"
-              (click)="drawer.close()">close</mat-icon>
-    <app-vertical-menu></app-vertical-menu>
-  </mat-drawer>
-  <mat-drawer-content class="closeIcon">
-    <button mat-raised-button
-            color="warn"
-            type="submit"
-            class="button"
-            (click)="drawer.open()">
+<mat-sidenav-container class="container"
+                       (backdropClick)="sidenav.close()">
+  <mat-sidenav #sidenav
+               (keydown.escape)="sidenav.close()"
+               disableClose
+               disableClose="true"
+               hashBackdrop="false">
+    <div class="buttonClose">
+      <mat-icon aria-label="Close"
+                class="buttonClose"
+                (click)="sidenav.close()">close</mat-icon>
+    </div>
+    <div>
+      <app-vertical-menu></app-vertical-menu>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <div class="buttonOpen">
       <mat-icon aria-label="Menu"
+                (click)="sidenav.open()"
                 class="menu">menu</mat-icon>
-    </button>
-    <app-home-menu class="homeMenu"></app-home-menu>
-  </mat-drawer-content>
-</mat-drawer-container>
+    </div>
+    <div>
+      <app-home-menu class="homeMenu"></app-home-menu>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

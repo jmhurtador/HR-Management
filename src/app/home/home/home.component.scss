@@ -1,24 +1,38 @@
 :host {
-  display: block;
+  display: flex;
   text-align: center;
 }
 
-.close {
-  display: inline-block;
-  margin-right: 5px;
-  margin-top: 5px;
-  width: 100%;
-  position: fixed;
-}
-
-.closeIcon {
-  margin-block-start: 5px;
-}
-
-.button {
-  margin-left: 5px;
-  margin-top: 5px;
+.container {
   position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.buttonOpen {
+  left: 5px;
+  top: 5px;
+  position: relative;
+  width: 100%;
+  text-align: left;
+}
+
+.buttonOpen:hover {
+  cursor: pointer;
+}
+
+.buttonClose {
+  position: relative;
+  right: 5px;
+  top: 5px;
+  width: 100%;
+  text-align: right;
+}
+
+.buttonClose:hover {
+  cursor: pointer;
 }
 
 .homeMenu {

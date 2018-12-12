@@ -1,70 +1,23 @@
-import * as _moment from 'moment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomHttpService } from './../../shared/custom-http/custom-http.service';
 import { DatePipe } from '@angular/common';
 import { Employee } from '../employee.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Project } from './../../projects/project.interface';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import {
-  MAT_MOMENT_DATE_FORMATS,
-  MomentDateAdapter,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
+
 import {
   MatPaginator,
   MatSort,
   MatTableDataSource,
 } from '@angular/material';
 
-// Depending on whether rollup is used, moment needs to be imported differently.
-// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
-// syntax. However, rollup creates a synthetic default module and we thus need to import it using
-// the `default as` syntax.
-// // tslint:disable-next-line:no-duplicate-imports
-// import {default as _rollupMoment} from 'moment';
-
-const moment = _moment;
-
-// See the Moment.js docs for the meaning of these formats:
-// https://momentjs.com/docs/#/displaying/format/
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss'],
-  providers: [
-    DatePipe,
-    // The locale would typically be provided on the root module of your application. We do it at
-    // the component level here, due to limitations of our example generation script.
-    { provide: MAT_DATE_LOCALE, useValue: 'es-CO' },
-
-    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
-    // `MatMomentDateModule` in your applications root module. We provide it at the component level
-    // here, due to limitations of our example generation script.
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE],
-    },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-  ],
 })
 export class EmployeesComponent implements OnInit {
   formGroup: FormGroup;
@@ -87,6 +40,8 @@ export class EmployeesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   url = 'app/employees';
+  urlProjects = 'app/projects';
+  projects: Project[];
 
   constructor(
     private api: CustomHttpService,
@@ -104,11 +59,12 @@ export class EmployeesComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
     this.createForm();
+
+    this.api.get<Project[]>(this.urlProjects).subscribe((result) => {
+      console.log(result);
+      this.projects = result;
+    });
   }
-  // this.datepipe.transform(
-  //   this.formGroup.get('birthday').value,
-  //   'yyyy/MM/dd',
-  // ),
 
   createForm() {
     this.formGroup = this.formBuilder.group({
@@ -132,14 +88,37 @@ export class EmployeesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  private calculateAge(birthday: Date) {
+    const now = new Date();
+    const born = new Date(birthday);
+    const years = Math.floor(
+      (now.getTime() - born.getTime()) / (365 * 24 * 60 * 60 * 1000),
+    );
+    return years;
+  }
+
   add() {
     console.log(this.formGroup.get('id').value);
+    // const projectIndex = this.projects.findIndex(
+    //   (p) => p.id === this.formGroup.get('project').value,
+    // );
+    // this.projects[projectIndex].teamSize++;
+
+    // this.api
+    //   .post(this.urlProjects, this.projects[projectIndex])
+    //   .pipe(
+    //     switchMap(() => this.api.get<Project[]>(this.urlProjects)),
+    //   )
+    //   .subscribe((resultupdated) => {});
 
     const employee: Employee = {
       id: this.formGroup.get('id').value,
       name: this.formGroup.get('name').value,
       company: this.formGroup.get('company').value,
-      age: 0,
+      age: this.calculateAge(
+        new Date(this.formGroup.get('birthday').value),
+      ),
       birthday: this.formGroup.get('birthday').value,
       favoriteColor: this.formGroup.get('favoriteColor').value,
       project: this.formGroup.get('project').value,
@@ -153,7 +132,8 @@ export class EmployeesComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
-    this.formGroup.patchValue({
+
+    this.formGroup.reset({
       id: null,
       name: '',
       company: '',
@@ -187,6 +167,18 @@ export class EmployeesComponent implements OnInit {
     if (
       confirm('Are you sure to delete ' + row.name + ' ?') === true
     ) {
+      // const projectIndex = this.projects.findIndex(
+      //   (p) => p.id === row.project,
+      // );
+      // this.projects[projectIndex].teamSize--;
+
+      // this.api
+      //   .post(this.urlProjects, this.projects[projectIndex])
+      //   .pipe(
+      //     switchMap(() => this.api.get<Project[]>(this.urlProjects)),
+      //   )
+      //   .subscribe((resultupdated) => {});
+
       const deleteUrl = this.url + '/' + row.id;
       console.log(deleteUrl);
       this.api

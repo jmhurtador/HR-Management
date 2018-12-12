@@ -20,12 +20,10 @@ const routes: Routes = [
     path: 'employees',
     component: EmployeesComponent,
     canActivate: [AuthenticationGuard],
-    // loadChildren: './employees/employees.module#EmployeesModule',
   },
   {
     path: 'projects',
     component: ProjectsComponent,
-    // loadChildren: './projects/projects.module#ProjectsModule',
   },
   { path: 'forbidden', component: HttpForbiddenComponent },
   { path: '**', component: HttpNotFoundComponent },
