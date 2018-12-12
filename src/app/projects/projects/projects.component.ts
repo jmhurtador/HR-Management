@@ -19,7 +19,7 @@ import {
 })
 export class ProjectsComponent implements OnInit {
   formGroup: FormGroup;
-  projectId?: number;
+
   displayedColumns: string[] = [
     'id',
     'name',

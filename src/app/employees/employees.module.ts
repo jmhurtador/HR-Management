@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { CustomHttpService } from './../shared/custom-http/custom-http.service';
 import { EmployeesComponent } from './employees/employees.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
@@ -14,6 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     EmployeesRoutingModule,
   ],
-  providers: [CustomHttpService],
+  providers: [CustomHttpService, DatePipe],
 })
 export class EmployeesModule {}

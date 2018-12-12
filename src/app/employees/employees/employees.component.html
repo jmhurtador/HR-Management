@@ -61,7 +61,7 @@
         <h3>Birthday</h3>
       </th>
       <td mat-cell
-          *matCellDef="let row"> {{row.birthday}} </td>
+          *matCellDef="let row"> {{ this.datepipe.transform(row.birthday, 'dd/MM/yyyy') }} </td>
     </ng-container>
 
     <!-- Favorite Color -->
@@ -95,7 +95,7 @@
       </th>
       <td mat-cell
           *matCellDef="let row">
-        <button mat-raised-button
+        <button mat-icon-button
                 color="warn"
                 type="button"
                 (click)="edit(row)">
@@ -113,12 +113,12 @@
       </th>
       <td mat-cell
           *matCellDef="let row">
-        <button mat-raised-button
+        <button mat-icon-button
                 color="warn"
                 type="button"
                 class="button"
                 (click)="delete(row)">
-          <mat-icon aria-label="Delete">remove</mat-icon>
+          <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -169,29 +169,38 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-element">
+    <mat-form-field>
       <input matInput
-             type="birthday"
+             [matDatepicker]="dp3"
              placeholder="Birthday"
-             formControlName="birthday"
-             required>
+             formControlName="birthday">
       <mat-hint>Choose a Birthday</mat-hint>
-      <mat-error *ngIf="!formGroup.controls['birthday'].valid && formGroup.controls['birthday'].touched">
-        <!-- {{ getErrorClientName() }} -->
-      </mat-error>
+      <mat-error *ngIf="!formGroup.controls['birthday'].valid && formGroup.controls['birthday'].touched"></mat-error>
+      <mat-datepicker-toggle matSuffix
+                             [for]="dp3"></mat-datepicker-toggle>
+      <mat-datepicker #dp3
+                      disabled="false"></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field class="form-element">
-      <input matInput
-             type="favoriteColor"
-             placeholder="Favorite Color"
-             formControlName="favoriteColor"
-             required>
-      <mat-hint>Choose a Favorite Color</mat-hint>
-      <mat-error *ngIf="!formGroup.controls['favoriteColor'].valid && formGroup.controls['favoriteColor'].touched">
-        <!-- {{ getErrorClientName() }} -->
-      </mat-error>
+    <mat-form-field>
+      <mat-select placeholder="Favorite Color"
+                  formControlName="favoriteColor"
+                  panelClass="example-panel-{{formGroup.controls['favoriteColor'].value}}"
+                  required>
+        <mat-option value="Yellow">Yellow</mat-option>
+        <mat-option value="Blue">Blue</mat-option>
+        <mat-option value="Red">Red</mat-option>
+        <mat-option value="Green">Green</mat-option>
+        <mat-option value="Purple">Purple</mat-option>
+        <mat-option value="Orange">Orange</mat-option>
+        <mat-option value="Black">Black</mat-option>
+        <mat-option value="White">White</mat-option>
+        <mat-option value="Gray">Gray</mat-option>
+      </mat-select>
+      <mat-hint>Choose your favorite color</mat-hint>
+      <mat-error *ngIf="!formGroup.controls['favoriteColor'].hasError('required') && !formGroup.controls['favoriteColor'].valid && formGroup.controls['favoriteColor'].touched">Please choose one color</mat-error>
     </mat-form-field>
+
 
     <mat-form-field class="form-element">
       <input matInput
