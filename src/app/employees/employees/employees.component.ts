@@ -177,7 +177,7 @@ export class EmployeesComponent implements OnInit {
       name: row.name,
       company: row.company,
       age: row.age,
-      birthday: new Date(row.birthday),
+      birthday: new Date(row.birthday).toISOString(),
       favoriteColor: row.favoriteColor,
       project: row.project,
     });
